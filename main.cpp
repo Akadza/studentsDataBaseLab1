@@ -37,8 +37,8 @@ void displayStudents(const std::vector<Student>& database) {
 }
 
 // Создает файл с информацией для студентов и сохраняет его
-void createFile(const std::string file) {
-
+void createFile(const std::vector<Student>& database, const std::string file) {
+    
 }
 
 int main() {
