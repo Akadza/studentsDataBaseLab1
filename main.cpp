@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <fstream>
 
 struct Student {
     std::string name;
@@ -36,17 +37,20 @@ void displayStudents(const std::vector<Student>& database) {
     }
 }
 
-// Создает файл с информацией для студентов и сохраняет его
-void createFile(const std::vector<Student>& database, const std::string file) {
-    std::ofstream out;
-    out.open("database.txt");
+// Функция для создания файла с информацией о студентах (ИСПРАВЛЕНА)
+void createFile(const std::vector<Student>& database, const std::string& filename) {
+    std::ofstream out(filename);
     if (out.is_open()) {
-        for (const Student* student : database) {
-            out << student->name << " " << student->age << " " << student->major << " " << student->gpa << "\n"
+        for (const Student& student : database) {
+            out << student.name << " " << student.age << " "
+                << student.major << " " << student.gpa << "\n";
         }
+        out.close();
+        std::cout << "Файл " << filename << " успешно создан и записан.\n";
     }
-    out.close();
-    std::cout << "File has been written" << std::endl;
+    else {
+        std::cout << "Ошибка открытия файла для записи.\n";
+    }
 }
 
 int main() {
@@ -54,25 +58,29 @@ int main() {
 
     int choice;
     do {
-        std::cout << "Меню:\n";
+        std::cout << "\nМеню:\n";
         std::cout << "1. Добавить студента\n";
         std::cout << "2. Вывести список студентов\n";
+        std::cout << "3. Сохранить данные в файл\n";
         std::cout << "0. Выход\n";
         std::cout << "Выберите действие: ";
         std::cin >> choice;
 
         switch (choice) {
-            case 1:
-                addStudent(database);
-                break;
-            case 2:
-                displayStudents(database);
-                break;
-            case 0:
-                std::cout << "Выход из программы.\n";
-                break;
-            default:
-                std::cout << "Неверный выбор. Попробуйте снова.\n";
+        case 1:
+            addStudent(database);
+            break;
+        case 2:
+            displayStudents(database);
+            break;
+        case 3:
+            createFile(database, "students_report.txt");
+            break;
+        case 0:
+            std::cout << "Выход из программы.\n";
+            break;
+        default:
+            std::cout << "Неверный выбор. Попробуйте снова.\n";
         }
     } while (choice != 0);
 
