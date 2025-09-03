@@ -2,6 +2,10 @@
 #include <vector>
 #include <string>
 #include <fstream>
+#include <windows.h>
+#include <locale>
+#include <io.h>
+#include <fcntl.h>
 
 struct Student {
     std::string name;
@@ -54,6 +58,9 @@ void createFile(const std::vector<Student>& database, const std::string& filenam
 }
 
 int main() {
+    SetConsoleCP(1251);
+    SetConsoleOutputCP(1251);
+    setlocale(LC_ALL, "Russian");
     std::vector<Student> database;
 
     int choice;
