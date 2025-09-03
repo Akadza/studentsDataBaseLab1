@@ -46,6 +46,7 @@ void createFile(const std::vector<Student>& database, const std::string file) {
         }
     }
     out.close();
+    std::cout << "File has been written" << std::endl;
 }
 
 int main() {
