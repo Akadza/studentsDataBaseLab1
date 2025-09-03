@@ -38,7 +38,14 @@ void displayStudents(const std::vector<Student>& database) {
 
 // Создает файл с информацией для студентов и сохраняет его
 void createFile(const std::vector<Student>& database, const std::string file) {
-    
+    std::ofstream out;
+    out.open("database.txt");
+    if (out.is_open()) {
+        for (const Student* student : database) {
+            out << student->name << " " << student->age << " " << student->major << " " << student->gpa << "\n"
+        }
+    }
+    out.close();
 }
 
 int main() {
