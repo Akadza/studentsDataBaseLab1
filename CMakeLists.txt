@@ -22,5 +22,3 @@ target_link_libraries(test_student PRIVATE gtest_main)
 
 include(GoogleTest)
 gtest_discover_tests(test_student)
-
-add_test(NAME StudentTests COMMAND test_student)
